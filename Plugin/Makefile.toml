@@ -1,0 +1,41 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.build_debug]
+script = '''
+echo -------- BUILDING PLUGIN SHARED LIBRARY [DEBUG]---------
+'''
+dependencies = ['cargo_build_debug', 'copy_debug']
+watch = true
+
+[tasks.build_release]
+script = '''
+echo -------- BUILDING PLUGIN SHARED LIBRARY [RELEASE]---------
+'''
+dependencies = ['cargo_build_release', 'copy_release']
+watch = true
+
+[tasks.cargo_build_debug]
+script = '''
+echo -------- BUILDING PLUGIN SHARED LIBRARY ---------
+cargo build
+'''
+
+[tasks.cargo_build_release]
+script = '''
+echo -------- BUILDING PLUGIN SHARED LIBRARY ---------
+cargo build --release
+'''
+
+
+[tasks.copy_debug]
+script = '''
+echo -------- COPYING TO TEMP DIR /tmp/HullGeyser [DEBUG] ---------
+cp ../target/debug/libhull_geyser.so /tmp/HullGeyser/libhull_plugin.so -v
+'''
+
+[tasks.copy_release]
+script = '''
+echo -------- COPYING TO TEMP DIR /tmp/HullGeyser [RELEASE] ---------
+cp ../target/release/libhull_plugin.so /tmp/HullGeyser/libhull_plugin.so -v
+'''
