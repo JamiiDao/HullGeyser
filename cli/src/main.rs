@@ -10,4 +10,8 @@ pub use user_args::*;
 mod configuration;
 pub use configuration::*;
 
-fn main() {}
+fn main() {
+    let user_args = get_args();
+
+    GeyserConfig::new(user_args).init().start_validator();
+}
