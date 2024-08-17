@@ -1,0 +1,17 @@
+[package]
+name = "hull-geyser"
+version.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+description.workspace = true
+
+[dependencies]
+clap = { version = "4.5.15" }
+directories = "5.0.1"
+bs58 = "*"
+jzon = "*"
+toml = "*"
+indicatif = "0.17.8"
+ctrlc = { version = "3.4.5", features = ["termination"] }
