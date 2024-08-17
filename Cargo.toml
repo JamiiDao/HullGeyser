@@ -1,0 +1,18 @@
+[workspace]
+members = ["Plugin", "cli"]
+
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+rust-version = "1.80.1"
+authors = ["448-OG <superuser@448.africa>"]
+license = "AGPL-3.0"
+edition = "2021"
+description = "Tools to launch your own Solana RPC server"
+
+
+[workspace.dependencies]
+solana-program = "2.0.4"
+tokio = { version = "1.39.2", features = ["full"] }
+log = "0.4.22"

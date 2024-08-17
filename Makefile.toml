@@ -1,0 +1,3 @@
+[tasks.default]
+clear = true
+dependencies = ["check"]
