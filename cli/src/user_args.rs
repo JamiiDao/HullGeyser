@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::{value_parser, ArgMatches, Command as ClapCommand};
 
-use crate::GeyserConfig;
+use crate::{GeyserConfig, Network};
 
 pub fn get_args() -> ArgMatches {
     ClapCommand::new("hull-rpc")
@@ -40,13 +40,16 @@ impl TryFrom<ArgMatches> for GeyserConfig {
     type Error = String; //FIXME return better errors
 
     fn try_from(user_args: ArgMatches) -> Result<Self, Self::Error> {
-        let mut parsed_config = GeyserConfig::default();
-
-        parsed_config.network = user_args.get_one::<String>("network").into();
-
-        parsed_config.account = user_args
+        let network: Network = user_args.get_one::<String>("network").into();
+        let account = user_args
             .get_one::<String>("account")
             .map(|account| account.to_owned());
+
+        let mut parsed_config = GeyserConfig {
+            network,
+            account,
+            ..Default::default()
+        };
 
         if let Some(path_exists) = user_args.get_one::<PathBuf>("multiple") {
             parsed_config.extras_location.replace(path_exists.into());
