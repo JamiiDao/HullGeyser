@@ -41,13 +41,9 @@ impl TryFrom<ArgMatches> for GeyserConfig {
 
     fn try_from(user_args: ArgMatches) -> Result<Self, Self::Error> {
         let network: Network = user_args.get_one::<String>("network").into();
-        let account = user_args
-            .get_one::<String>("account")
-            .map(|account| account.to_owned());
 
         let mut parsed_config = GeyserConfig {
             network,
-            account,
             ..Default::default()
         };
 
